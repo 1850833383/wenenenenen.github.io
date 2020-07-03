@@ -1,2 +1,2 @@
 # wendy.github.io
-Private Blog
+Personal Blog
