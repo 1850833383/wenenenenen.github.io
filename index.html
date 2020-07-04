@@ -9,8 +9,10 @@
 		<title>Giao Giao</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="shortcut icon" href="images/hen.ico" />
+		<link rel="shortcut icon" href="images/icon/hen.ico" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -21,13 +23,15 @@
 				<!-- One -->
 					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
 						<div class="content">
-							<h1>Story</h1>
-							<p class="major">A (modular, highly tweakable) responsive one-page template designed by <a href="https://html5up.net">HTML5 UP</a> and released for free under the <a href="https://html5up.net/license">Creative Commons</a>.</p>
+							<div><img src="images/logo.png" style="width: 100px;"/></div>
+							<p class="major">病毒：SARS-CoV-2，其导致疾病命名 COVID-19</p>
+							<p class="major">传染源：新冠肺炎的患者。无症状感染者也可能成为传染源。</p>
+							<p class="major">传播途径：经呼吸道飞沫、接触传播是主要的传播途径。气溶胶传播和消化道等传播途径尚待明确。</p>
 							<ul class="actions stacked">
-								<li><a href="#first" class="button big wide smooth-scroll-middle">Get Started</a></li>
+								<li><a href="#first" class="button big wide smooth-scroll-middle">了解更多</a></li>
 							</ul>
 						</div>
-						<div class="image" style="background-color: rgba(214, 33, 33, 0.575);">
+						<div class="image" style="background-color: #eee; width: 60%;" id="map">
 							<!-- <img src="images/banner.jpg" alt="" /> -->
 						</div>
 					</section>
@@ -286,6 +290,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script src="assets/js/map.js"></script>
 	</body>
 </html>
