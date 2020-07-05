@@ -14,6 +14,46 @@
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			ul{
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.maphead{
+				width: 100%;
+				background-color: #ccc;
+				position: absolute;
+				top: 0;
+				border-radius: 5px;
+			}
+			.headli{
+				width: 25%;
+				float: left;
+				padding: 0.5rem;
+				text-align: center;
+				font-size: 25px;
+			}
+			.legend{
+				width: 16%;
+				background-color: #ccc;
+				position: absolute;
+				bottom: 0;
+				border-radius: 5px;
+			}
+			.legendul{
+				width: 100%;
+				font-size: 1rem;
+			}
+			.legendli1{
+				width: 15px;
+				height: 15px;
+				background-color: aqua;
+				float: left;
+				margin: 0.1rem;
+				margin-right: 1rem;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -33,6 +73,48 @@
 						</div>
 						<div class="image" style="background-color: #eee; width: 60%;" id="map">
 							<!-- <img src="images/banner.jpg" alt="" /> -->
+							<div class="maphead">
+								<ul class="" style="width: 100%;">
+									<li class="headli">现有确诊</li>
+									<li class="headli">累计确诊</li>
+									<li class="headli">累计治愈</li>
+									<li class="headli">累计死亡</li>
+								</ul>
+								<ul class="" style="width: 100%;">
+									<li class="headli">100</li>
+									<li class="headli">800</li>
+									<li class="headli">800</li>
+									<li class="headli">12</li>
+								</ul>
+							</div>
+							<div class="legend">
+								<ul class="legendul">
+									<li>
+										<div class="legendli1"></div>
+										<span class="legendli2">0</span>
+									</li>
+									<li>
+										<div class="legendli1"></div>
+										<span class="legendli2">1-9</span>
+									</li>
+									<li>
+										<div class="legendli1"></div>
+										<span class="legendli2">10-49</span>
+									</li>
+									<li>
+										<div class="legendli1"></div>
+										<span class="legendli2">50-99</span>
+									</li>
+									<li>
+										<div class="legendli1"></div>
+										<span class="legendli2">100-999</span>
+									</li>
+									<li>
+										<div class="legendli1"></div>
+										<span class="legendli2">>=1000</span>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</section>
 

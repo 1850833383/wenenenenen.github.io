@@ -1,6 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoiemhpd2VuaiIsImEiOiJjand2eGlzb2MwYWg3NDlyMXNmbGJyZGh2In0.VCR4KV-QWW2vBugH2G6cDw';
 var map,style;
-var curr_yq = {};
 
 // var style = {
 //     "version": 8,
@@ -15,11 +14,11 @@ var curr_yq = {};
 //疫情数据
 getJson('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=北京市').then(function(yqjson){
     if(yqjson.success){
-        curr_yq = yqjson;
         let properties = yqjson.results[0].cities;
         //北京geojson
-        getJson('https://geo.datav.aliyun.com/areas_v2/bound/110000_full.json').then(function(bjgeojson){
+        getJson('assets/json/beijing.json').then(function(bjgeojson){
             let features = bjgeojson.features;
+            let legendcolordom = $('.legendli1');let legendnumdom = $('.legendli2');
                     for (let p = 0; p < properties.length; p++) {
                         const city = properties[p];
                         for (let f = 0; f < features.length; f++) {
@@ -29,16 +28,28 @@ getJson('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=北京市').the
                                 feature.id = feature.properties.adcode;
                                     if(city.currentConfirmedCount == 0){//1<= deliverNumber && deliverNumber<= 8
                                         feature.properties.yqcolor = '#ffffff';
+                                        legendcolordom.css('background-color','#ffffff');
+                                        legendcolordom.html('0');
                                     }else if(0 < city.currentConfirmedCount && city.currentConfirmedCount < 10){
                                         feature.properties.yqcolor = '#ffe5db';
+                                        legendcolordom.css('background-color','#ffe5db');
+                                        legendcolordom.html('0-9');
                                     }else if(10 <= city.currentConfirmedCount && city.currentConfirmedCount < 50){
                                         feature.properties.yqcolor = '#ffc4b3';
+                                        legendcolordom.css('background-color','#ffc4b3');
+                                        legendcolordom.html('10-49');
                                     }else if(50 <= city.currentConfirmedCount && city.currentConfirmedCount < 100){
                                         feature.properties.yqcolor = '#ff9985';
+                                        legendcolordom.css('background-color','#ff9985');
+                                        legendcolordom.html('50-99');
                                     }else if(100 <= city.currentConfirmedCount && city.currentConfirmedCount < 1000){
                                         feature.properties.yqcolor = '#f57567';
+                                        legendcolordom.css('background-color','#f57567');
+                                        legendcolordom.html('100-999');
                                     }else if(1000 <= city.currentConfirmedCount){
                                         feature.properties.yqcolor = '#e64546';
+                                        legendcolordom.css('background-color','#e64546');
+                                        legendcolordom.html('>=1000');
                                     }
                             }else if(feature.properties.adcode == 110117){
                                 feature.properties.yqcolor = '#ffffff';
@@ -116,42 +127,15 @@ getJson('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=北京市').the
                         closeOnClick: false,
                         offset:[0,-10]
                     });
-                    
+                
                     map.on("mousemove", "beijing_fill", function(e) {
                         if (e.features.length > 0) {
                             let geometry = e.features[0].geometry;
-
                             if (hoveredStateId) {
                                 map.setFeatureState({source: 'bj_geoJson', id: hoveredStateId}, { hover: false});
                             }
                             hoveredStateId = e.features[0].id;
                             map.setFeatureState({source: 'bj_geoJson', id: hoveredStateId}, { hover: true});
-
-                            // if(map.getSource('city_yellowSource')){
-                            //     if(map.getLayer('city_yellowLayer')){
-                            //         map.removeLayer('city_yellowLayer')
-                            //     }
-                            //     map.removeSource('city_yellowSource')
-                            // }
-                            // map.addSource('city_yellowSource',{
-                            //     'type': 'geojson',
-                            //     'data': {
-                            //         'type': 'Feature',
-                            //         'geometry': geometry
-                            //     }
-                            // });
-                            // map.addLayer({
-                            //     "id": "city_yellowLayer",
-                            //     "type": "fill",
-                            //     "source": "city_yellowSource",
-                            //     "layout": {
-                            
-                            //     },
-                            //     'paint': {
-                            //         'fill-color': 'yellow',
-                            //         "fill-opacity": 0.8
-                            //     }
-                            // });
                             var name = e.features[0].properties.name;
                             var curr = e.features[0].properties.currentConfirmedCount;
                             if(!curr){
@@ -165,13 +149,6 @@ getJson('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=北京市').the
                     });
                     
                     map.on('mouseleave', "beijing_fill", function() {
-
-                        // if(map.getSource('city_yellowSource')){
-                        //     if(map.getLayer('city_yellowLayer')){
-                        //         map.removeLayer('city_yellowLayer')
-                        //     }
-                        //     map.removeSource('city_yellowSource')
-                        // }
                         if (hoveredStateId) {
                             map.setFeatureState({source: 'bj_geoJson', id: hoveredStateId}, { hover: false});
                         }
