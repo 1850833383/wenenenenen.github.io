@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>map</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+    <script src="https://api.map.baidu.com/api?v=2.0&ak=VeMMUMkP352GvNtwGQToiakGsgqR3bHV"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+    <style>
+        html,body{        
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .head{
+            width: 250px;
+            height: 20%;
+            background-color: #d3d4d3;
+            position: absolute;
+            top: 30px;
+            border-radius: 5px;
+        }
+        .headul{
+            width: 100%;
+            height: 50%;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .headli{
+            list-style-type: none;
+            float: left;
+            width: 25%;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body id="map">
+<script>
+(function($) {
+    var dom = document.getElementById("map");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    myChart.showLoading();
+    //疫情数据
+    // $.get('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=北京市',function(yqjson){
+        // if(yqjson.success){
+        //     let properties = yqjson.results[0].cities;
+            //北京geojson
+            $.get('../json/beijing.json',function(bjgeojson){
+                myChart.hideLoading();
+
+                echarts.registerMap('BJ', bjgeojson, {
+                    // '门头沟区': {
+                    //     left: -110,
+                    //     top: 28,
+                    //     width: 5
+                    // }
+                });
+
+                var option = {
+                    title: {
+                        text: '',
+                        subtext: '数据来源为丁香园，开放给所有有需要的人',
+                        sublink: 'https://lab.isaaclin.cn/nCoV'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{b}<br/><font color="red">{c}</font> (人)'
+                    },
+                    /*toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: 'right',
+                        top: 'center',
+                        feature: {
+                            dataView: {readOnly: false},
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },*/
+                    visualMap: {
+                        min: 0,
+                        max: 500,
+                        text: ['高风险', '低风险'],
+                        realtime: false,
+                        calculable: true,
+                        inRange: {
+                            color: ['#ffffff', '#ff9985', '#e64546']
+                        }
+                    },
+                    series: [
+                        {
+                            name: '北京疫情',
+                            type: 'map',
+                            mapType: 'BJ', // 自定义扩展图表类型
+                            label: {
+                                show: true
+                            },
+                            data: [
+                                {name: '东城区', value: 10},
+                                {name: '西城区', value: 11},
+                                {name: '朝阳区', value: 100},
+                                {name: '丰台区', value: 250},
+                                {name: '石景山区', value: 30},
+                                {name: '海淀区', value: 89},
+                                {name: '门头沟区', value: 75},
+                                {name: '房山区', value: 54},
+                                {name: '通州区', value: 125},
+                                {name: '顺义区', value: 24},
+                                {name: '昌平区', value: 78},
+                                {name: '大兴区', value: 153},
+                                {name: '怀柔区', value: 102},
+                                {name: '平谷区', value: 53},
+                                {name: '密云区', value: 95},
+                                {name: '延庆区', value: 42}
+                            ]
+                        }
+                    ]
+                };
+            
+                myChart.setOption(option);
+            });
+        // }
+    // });
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+
+    // <ul class="" style="width: 100%;">
+	// 	<li class="headli">现有确诊</li>
+	// 	<li class="headli">累计确诊</li>
+	// 	<li class="headli">累计治愈</li>
+	// 	<li class="headli">累计死亡</li>
+	// </ul>
+	// <ul class="" style="width: 100%;">
+	// 	<li class="headli">100</li>
+	// 	<li class="headli">800</li>
+	// 	<li class="headli">800</li>
+	// 	<li class="headli">12</li>
+    // </ul>
+    var $ul1 = '<ul class="headul">'+
+                '<li class="headli">现有确诊</li>'+
+                '<li class="headli">累计确诊</li>'+
+                '<li class="headli">累计治愈</li>'+
+                '<li class="headli">累计死亡</li>'+
+              '</ul>';
+    var $ul2 = '<ul class="headul" style="margin-top: 16px;">'+
+                '<li class="headli">100</li>'+
+                '<li class="headli">800</li>'+
+                '<li class="headli">100</li>'+
+                '<li class="headli">12</li>'+
+              '</ul>';
+    
+    var $head = '<div class="head"></div>';
+    $('body').append($head);
+    $('.head').append($ul1);$('.head').append($ul2);
+
+    //同步获取数据
+    function getJson(url) {
+        return new Promise(function(resolve, reject) {
+            $.get(url, (response) => {
+                resolve(response);
+            });
+        });
+    }
+})(jQuery);
+</script>
+</body>
+</html>

@@ -159,12 +159,3 @@ getJson('https://lab.isaaclin.cn/nCoV/api/area?latest=1&province=北京市').the
         });
     }
 });
-
-//同步获取数据
-function getJson(url) {
-    return new Promise(function(resolve, reject) {
-        $.get(url, (response) => {
-            resolve(response);
-        });
-    });
-}
