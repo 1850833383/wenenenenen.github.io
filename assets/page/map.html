@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
         .head{
-            width: 250px;
+            width: 230px;
             height: 20%;
             background-color: #d3d4d3;
             position: absolute;
@@ -37,7 +37,7 @@
             list-style-type: none;
             float: left;
             width: 25%;
-            font-size: 25px;
+            font-size: 22px;
         }
     </style>
 </head>
@@ -68,8 +68,8 @@
                 var option = {
                     title: {
                         text: '',
-                        subtext: '数据来源为丁香园，开放给所有有需要的人',
-                        sublink: 'https://lab.isaaclin.cn/nCoV'
+                        subtext: '数据来源为用友link，开放给所有有需要的人',
+                        sublink: 'https://api.yonyoucloud.com/#/'
                     },
                     tooltip: {
                         trigger: 'item',
@@ -88,7 +88,7 @@
                     },*/
                     visualMap: {
                         min: 0,
-                        max: 500,
+                        max: 300,
                         text: ['高风险', '低风险'],
                         realtime: false,
                         calculable: true,
@@ -98,29 +98,29 @@
                     },
                     series: [
                         {
-                            name: '北京疫情',
+                            name: '北京疫情累计确诊',
                             type: 'map',
                             mapType: 'BJ', // 自定义扩展图表类型
                             label: {
                                 show: true
                             },
                             data: [
-                                {name: '东城区', value: 10},
-                                {name: '西城区', value: 11},
-                                {name: '朝阳区', value: 100},
-                                {name: '丰台区', value: 250},
-                                {name: '石景山区', value: 30},
-                                {name: '海淀区', value: 89},
-                                {name: '门头沟区', value: 75},
-                                {name: '房山区', value: 54},
-                                {name: '通州区', value: 125},
-                                {name: '顺义区', value: 24},
-                                {name: '昌平区', value: 78},
-                                {name: '大兴区', value: 153},
-                                {name: '怀柔区', value: 102},
-                                {name: '平谷区', value: 53},
-                                {name: '密云区', value: 95},
-                                {name: '延庆区', value: 42}
+                                {name: '东城区', value: 19},
+                                {name: '西城区', value: 59},
+                                {name: '朝阳区', value: 77},
+                                {name: '丰台区', value: 273},
+                                {name: '石景山区', value: 15},
+                                {name: '海淀区', value: 82},
+                                {name: '门头沟区', value: 5},
+                                {name: '房山区', value: 20},
+                                {name: '通州区', value: 20},
+                                {name: '顺义区', value: 10},
+                                {name: '昌平区', value: 30},
+                                {name: '大兴区', value: 104},
+                                {name: '怀柔区', value: 7},
+                                {name: '平谷区', value: 0},
+                                {name: '密云区', value: 7},
+                                {name: '延庆区', value: 1}
                             ]
                         }
                     ]
@@ -153,10 +153,10 @@
                 '<li class="headli">累计死亡</li>'+
               '</ul>';
     var $ul2 = '<ul class="headul" style="margin-top: 16px;">'+
-                '<li class="headli">100</li>'+
-                '<li class="headli">800</li>'+
-                '<li class="headli">100</li>'+
-                '<li class="headli">12</li>'+
+                '<li class="headli">251</li>'+
+                '<li class="headli">929</li>'+
+                '<li class="headli">669</li>'+
+                '<li class="headli">9</li>'+
               '</ul>';
     
     var $head = '<div class="head"></div>';
