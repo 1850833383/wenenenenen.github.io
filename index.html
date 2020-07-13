@@ -27,7 +27,7 @@
 </head>
 <body id="mydiv">
 	<div class="wyy_close" id="wyy">
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=402453283&auto=1&height=430"></iframe>
+		<iframe id="wyyframe" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=402453283&auto=1&height=430"></iframe>
 	</div>
 <nav>
 	<ul>
@@ -81,6 +81,8 @@
 </nav>
 
 <script>
+    let parentDomain = window.location.hostname;
+    document.domain = parentDomain;
 </script>
 </div>
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
