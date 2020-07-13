@@ -21,7 +21,7 @@
             layer.msg('网易云接入入口有待完善,再次点击关闭', {icon: 5}, function(){
               // $('#wyy').removeClass('wyy_open').addClass('wyy_close');
             });
-          }, 5000);
+          }, 1000);
         }else{
           $('#wyy').removeClass('wyy_open').addClass('wyy_close');
         }
